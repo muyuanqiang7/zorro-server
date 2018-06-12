@@ -178,7 +178,9 @@
                                 <location>com.funi.muyq.angular.zorroserver.vo</location>
                                 <location>com.funi.muyq.angular.zorroserver.controller</location>
                             </locations>
-                            <schemes>http</schemes>
+                            <schemes>
+                                <scheme>http</scheme>
+                            </schemes>
                             <host>${server.host}:${server.port}}</host>
                             <basePath>${server.path}</basePath>
                             <info>

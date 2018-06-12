@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @Author: [muyuanqiang]
@@ -17,14 +18,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("user")
-@Api(value = "系统用户接口")
 public class UserController {
 
     @GetMapping(value = "/{uuid}")
-    public List<SystemUser> findUserByUuid(@PathVariable("uuid") String uuid) throws Exception {
+    public SystemUser findUserByUuid(@PathVariable("uuid") String uuid) {
         if (!Strings.isNullOrEmpty(uuid)) {
-            throw new Exception("user not found");
         }
-        return Lists.newArrayList();
+        SystemUser systemUser = new SystemUser();
+        systemUser.setUuid(UUID.randomUUID().toString());
+        return systemUser;
     }
 }
