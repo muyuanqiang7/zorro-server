@@ -32,6 +32,9 @@
         <swagger-maven.version>3.1.7</swagger-maven.version>
         <swagger-codegen.version>2.3.1</swagger-codegen.version>
         <ng.version>6.0.0</ng.version>
+        <server.port>8080</server.port>
+        <server.host>localhost</server.host>
+        <server.path>/zorro</server.path>
     </properties>
 
     <dependencies>
@@ -111,6 +114,13 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -151,32 +161,41 @@
                 <groupId>com.github.kongchen</groupId>
                 <artifactId>swagger-maven-plugin</artifactId>
                 <version>${swagger-maven.version}</version>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
                     <apiSources>
                         <apiSource>
                             <springmvc>true</springmvc>
                             <locations>
-                                <location>com.funi.muyq.springbootangular.controller</location>
-                                <location>com.funi.muyq.springbootangular.entity</location>
+                                <location>com.funi.muyq.angular.zorroserver.po</location>
+                                <location>com.funi.muyq.angular.zorroserver.vo</location>
+                                <location>com.funi.muyq.angular.zorroserver.controller</location>
                             </locations>
                             <schemes>http</schemes>
-                            <host>localhost:8080</host>
-                            <basePath>/cas</basePath>
+                            <host>${server.host}:${server.port}}</host>
+                            <basePath>${server.path}</basePath>
                             <info>
-                                <title>Angular</title>
-                                <version>v1</version>
-                                <description>This is a sample for swagger-maven-plugin</description>
+                                <title>Angular NG-ZORRO</title>
+                                <version>v1.0.0</version>
+                                <description>Angular NG-ZORRO server side</description>
                                 <termsOfService>
                                     http://www.github.com/kongchen/swagger-maven-plugin
                                 </termsOfService>
                                 <contact>
-                                    <email>kongchen@gmail.com</email>
-                                    <name>Kong Chen</name>
-                                    <url>http://kongch.com</url>
+                                    <email>muyuanqiang7@gmail.com</email>
+                                    <name>muyuanqiang7</name>
+                                    <url>https://github.com/muyuanqiang7/zorro-server</url>
                                 </contact>
                                 <license>
-                                    <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
-                                    <name>Apache 2.0</name>
+                                    <url>https://en.wikipedia.org/wiki/MIT_License</url>
+                                    <name>MIT License</name>
                                 </license>
                             </info>
                             <!-- Support classpath or file absolute path here.
@@ -190,14 +209,6 @@
                         </apiSource>
                     </apiSources>
                 </configuration>
-                <executions>
-                    <execution>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>io.swagger</groupId>

@@ -12,6 +12,8 @@
 
 ### IntelliJ IDEA ###
 .idea
+generated
+generated-sources
 *.iws
 *.iml
 *.ipr
