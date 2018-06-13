@@ -14,5 +14,8 @@ import lombok.ToString;
 public class ErrorDetails {
     private Long timestamp;
     private String message;
-    private String details;
+    private String path;
+    private int status;
+    private Object data;
+
 }

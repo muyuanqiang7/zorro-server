@@ -21,21 +21,21 @@ import java.util.Optional;
 @RestController
 public class GlobalControllerExceptionHandler {
     @ExceptionHandler(value = {Exception.class})
-    public final ResponseEntity<ErrorDetails> notFoundException(final Exception e) {
-        return error(e, HttpStatus.BAD_REQUEST, e.getMessage());
+    public final ResponseEntity<ErrorDetails> serverError(HttpServletRequest request, Exception e) {
+        return error(e, HttpStatus.INTERNAL_SERVER_ERROR, request.getRequestURI());
     }
 
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NoHandlerFoundException.class)
     public ResponseEntity<ErrorDetails> handleConflict(HttpServletRequest request, Exception e) {
-        return error(e, HttpStatus.NOT_FOUND, e.getMessage());
+        return error(e, HttpStatus.NOT_FOUND, request.getRequestURI());
     }
 
     private ResponseEntity<ErrorDetails> error(final Exception exception, final HttpStatus httpStatus, final String logRef) {
         final String message = Optional.of(exception.getMessage()).orElse(exception.getClass().getSimpleName());
 
-        return new ResponseEntity<>(new ErrorDetails(System.currentTimeMillis(), message, logRef), httpStatus);
+        return new ResponseEntity<>(new ErrorDetails(System.currentTimeMillis(), message, logRef, httpStatus.value(), null), httpStatus);
     }
 
 }

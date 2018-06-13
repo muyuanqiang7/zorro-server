@@ -138,14 +138,17 @@
                         <fileset>
                             <directory>${project.basedir}/target</directory>
                             <followSymlinks>false</followSymlinks>
+                            <useDefaultExcludes>true</useDefaultExcludes>
                         </fileset>
                         <fileset>
                             <directory>${project.basedir}/generated</directory>
                             <followSymlinks>false</followSymlinks>
+                            <useDefaultExcludes>true</useDefaultExcludes>
                         </fileset>
                         <fileset>
                             <directory>${project.basedir}/generated-sources</directory>
                             <followSymlinks>false</followSymlinks>
+                            <useDefaultExcludes>true</useDefaultExcludes>
                         </fileset>
                     </filesets>
                 </configuration>
