@@ -20,6 +20,7 @@ public class UserController {
     @GetMapping(value = "/{uuid}")
     public SystemUser findUserByUuid(@PathVariable("uuid") String uuid) {
         if (!Strings.isNullOrEmpty(uuid)) {
+            return new SystemUser();
         }
         SystemUser systemUser = new SystemUser();
         systemUser.setUuid(UUID.randomUUID().toString());

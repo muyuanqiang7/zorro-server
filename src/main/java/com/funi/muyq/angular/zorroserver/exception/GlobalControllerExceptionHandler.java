@@ -18,13 +18,11 @@ import java.util.Optional;
  */
 @EnableWebMvc
 @ControllerAdvice
-@RestController
 public class GlobalControllerExceptionHandler {
     @ExceptionHandler(value = {Exception.class})
     public final ResponseEntity<ErrorDetails> serverError(HttpServletRequest request, Exception e) {
         return error(e, HttpStatus.INTERNAL_SERVER_ERROR, request.getRequestURI());
     }
-
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NoHandlerFoundException.class)
